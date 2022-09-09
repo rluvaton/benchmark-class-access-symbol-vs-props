@@ -16,7 +16,7 @@ function getClassWithJsPrivate() {
 }
 
 function getClassWithSymbol() {
-  const kA = Symbol('a');
+  const kA = Symbol('kA');
   class A {
     [kA]() {
       return 5;
@@ -31,28 +31,54 @@ function getClassWithSymbol() {
 }
 
 
+function getObjWithSymbol() {
+
+  const kAObj = Symbol('kAObj');
+
+  function ObjWithPrivateSymbol() {
+
+  }
+
+  ObjWithPrivateSymbol.prototype.test = function() {
+    this[kAObj]();
+  }
+  ObjWithPrivateSymbol.prototype[kAObj] = function() {
+    return 5;
+  }
+
+  return new ObjWithPrivateSymbol()
+}
+
+
 const size = 1000
 
 const allOptions = Array.from(
   { length: size },
-  () => [getClassWithJsPrivate(), getClassWithSymbol()],
+  () => [getClassWithJsPrivate(), getClassWithSymbol(), getObjWithSymbol()],
 );
 let index = 0;
 
 
 // add tests
 suite
-  .add('access to private property', function () {
+  .add('Class | access to private property', function () {
     const clazz = allOptions[index % size][0];
 
     clazz.test();
 
     index++;
   })
-  .add('access to private symbol', function () {
+  .add('Class | access to private symbol', function () {
     const clazz = allOptions[index % size][1];
 
     clazz.test();
+
+    index++;
+  })
+  .add('object | access to private symbol', function () {
+    const obj = allOptions[index % size][2];
+
+    obj.test();
 
     index++;
   })

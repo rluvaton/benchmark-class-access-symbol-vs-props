@@ -7,9 +7,11 @@
 ## Results:
 
 ```
-access to private property x 42,378,801 ops/sec ±0.14% (99 runs sampled)
-access to private symbol x 10,833,453 ops/sec ±0.44% (93 runs sampled)
-Fastest is access to private property
+Class | access to private property x 39,126,850 ops/sec ±0.30% (99 runs sampled)
+Class | access to private symbol x 10,620,957 ops/sec ±0.41% (99 runs sampled)
+object | access to private symbol x 11,811,610 ops/sec ±0.52% (99 runs sampled)
+Fastest is Class | access to private property
+
 ```
 
 ## How to run:
